@@ -1,0 +1,100 @@
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+html, body {
+  background-color: #F4F4F4;
+  font-family: 'Open Sans', sans-serif;
+  width: 100vw;
+  height: 100vh;
+}
+
+@for $i from 1 through 400 {
+  .w-#{$i} {
+    width: #{$i}px !important;
+  }
+}
+
+*:focus, .p-paginator-rpp-options, .p-checkbox-box.p-focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.p-inputtext, .p-autocomplete, .p-inputnumber, .p-calendar {
+  width: 100%;
+}
+
+.p-sidebar, .p-sidebar-content {
+  z-index: 999 !important;
+  padding: 0 !important;
+}
+
+.p-dialog-header > h5 {
+  margin-bottom: 0;
+}
+
+.nav .pi {
+  font-size: 1.1rem;
+}
+
+.p-menu {
+  width: 100%;
+  border: none;
+
+  .pi, .p-menuitem-link {
+    font-size: 1.3rem;
+  }
+
+  .p-menuitem-link {
+    height: 3.3rem;
+
+    span:first-child {
+      padding: 0 1rem;
+    }
+  }
+}
+
+.header {
+  font-weight: 500;
+  font-size: 1.5em;
+  display: block;
+  padding: 1em;
+  width: 100%;
+
+  div {
+    display: inline-block;
+    padding: 0;
+  }
+
+  div:last-child {
+    text-align: end;
+  }
+
+  .id {
+    padding-left: .6em;
+    font-weight: 400;
+    font-size: 16px;
+  }
+}
+
+table {
+  width: 100%;
+
+  td {
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
+
+.actions {
+  text-align: center;
+
+  .p-button-link {
+    font-size: 1.2em;
+    color: #333333;
+    padding: 0;
+  }
+}
+
+.space {
+  height: 2rem;
+}

@@ -1,0 +1,31 @@
+<p-card>
+  <p-header class="header">
+    <div class="col-12 col-md-6">
+      <span>Categoria</span>
+      <span *ngIf="objeto.id" class="id">Id: {{objeto.id}}</span>
+    </div>
+    <app-form-buttons (changeUrlEvent)="changeUrl()"
+                      (newEvent)="new()"
+                      (saveEvent)="save()"></app-form-buttons>
+  </p-header>
+  <form>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <label [for]="descricao.id">Descrição: *</label>
+            <input #descricao
+                   [(ngModel)]="objeto.descricao"
+                   appValidation
+                   id="descricao"
+                   maxlength="100"
+                   name="descricao"
+                   pInputText
+                   required
+                   type="text">
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</p-card>

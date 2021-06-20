@@ -1,0 +1,17 @@
+.nav {
+  box-shadow: 0 3px 6px 0 rgba(gray, .7);
+  background-color: #007AD9;
+  position: fixed;
+  padding: 0 1rem;
+  display: table;
+  z-index: 1000;
+  height: 4rem;
+  width: 100%;
+
+  div {
+    vertical-align: middle;
+    display: table-cell;
+    color: #FFFFFF;
+    width: 33%;
+  }
+}

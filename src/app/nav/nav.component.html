@@ -1,0 +1,15 @@
+<div class="nav">
+  <div>
+    <p-button (onClick)="display = !display" icon="pi pi-bars"></p-button>
+  </div>
+  <div class="text-center" style="font-size: 1.5rem">Web Pedido</div>
+  <div></div>
+</div>
+
+<p-sidebar [(visible)]="display"
+           [closeOnEscape]="false"
+           [modal]="false"
+           [showCloseIcon]="false"
+           [style]="{marginTop: '4rem', width: '15rem', padding: '0'}">
+  <p-menu [model]="itens"></p-menu>
+</p-sidebar>

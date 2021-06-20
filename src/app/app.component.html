@@ -1,0 +1,27 @@
+<app-nav></app-nav>
+<div style="height: 7rem"></div>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+<div style="height: 3rem"></div>
+
+<p-toast [preventOpenDuplicates]="true"
+         position="bottom-right"></p-toast>
+
+<p-confirmDialog #cd [style]="{width: '400px'}">
+  <ng-template pTemplate="header">
+    <h5>Confirmação</h5>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button (click)="cd.reject()"
+            class="p-button-text"
+            label="Não"
+            pButton
+            type="button"></button>
+    <button (click)="cd.accept()"
+            class="p-button-text"
+            label="Sim"
+            pButton
+            type="button"></button>
+  </ng-template>
+</p-confirmDialog>
