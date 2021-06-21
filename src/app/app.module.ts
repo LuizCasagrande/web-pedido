@@ -16,6 +16,8 @@ import {PrimengModule} from './primeng/primeng.module';
 import {ClienteModule} from './cliente/cliente.module';
 import {PedidoModule} from './pedido/pedido.module';
 import {InicioModule} from './inicio/inicio.module';
+import {LoaderModule} from './shared/component/loader/loader.module';
+import {LoaderService} from './shared/component/loader/loader.service';
 
 registerLocaleData(localePt);
 
@@ -36,12 +38,14 @@ registerLocaleData(localePt);
     ClienteModule,
     PedidoModule,
     PrimengModule,
+    LoaderModule,
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'pt-BR'},
     {provide: DEFAULT_CURRENCY_CODE, useValue: 'BRL'},
     MessageService,
     ConfirmationService,
+    LoaderService,
   ],
   bootstrap: [AppComponent]
 })

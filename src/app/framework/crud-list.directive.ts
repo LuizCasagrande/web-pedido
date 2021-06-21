@@ -5,6 +5,7 @@ import {Table} from 'primeng/table';
 import {finalize} from 'rxjs/operators';
 import {Exception} from '../shared/exception/exception';
 import {throttle} from '../shared/decorator/throttle';
+import {LoaderService} from '../shared/component/loader/loader.service';
 
 @Directive()
 export abstract class CrudListDirective<T, Y> {
@@ -18,10 +19,12 @@ export abstract class CrudListDirective<T, Y> {
   @ViewChild(Table) table: Table;
   protected messageService: MessageService;
   protected confirmationService: ConfirmationService;
+  protected loader: LoaderService;
 
   protected constructor(protected injector: Injector, protected service: CrudService<T, Y>) {
     this.messageService = injector.get(MessageService);
     this.confirmationService = injector.get(ConfirmationService);
+    this.loader = injector.get(LoaderService);
   }
 
   @throttle()
@@ -41,10 +44,13 @@ export abstract class CrudListDirective<T, Y> {
     this.confirmationService.confirm({
       message: 'Tem certeza que deseja remover?',
       accept: () => {
-        this.service.delete(id).subscribe(() => {
-          this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Registro removido'});
-          this.load();
-        }, error => Exception.show(error, this.messageService));
+        this.loader.display(true);
+        this.service.delete(id)
+          .pipe(finalize(() => this.loader.display(false)))
+          .subscribe(() => {
+            this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Registro removido'});
+            this.load();
+          }, error => Exception.show(error, this.messageService));
       }
     });
   }

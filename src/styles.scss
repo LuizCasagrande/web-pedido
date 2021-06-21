@@ -53,6 +53,10 @@ html, body {
   }
 }
 
+.p-blockui {
+  z-index: 9999 !important;
+}
+
 .header {
   font-weight: 500;
   font-size: 1.5em;

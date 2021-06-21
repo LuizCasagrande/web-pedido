@@ -5,6 +5,8 @@ import {CrudService} from './crud.service';
 import {BaseFormDirective} from './base-form.directive';
 import {Exception} from '../shared/exception/exception';
 import {throttle} from '../shared/decorator/throttle';
+import {LoaderService} from '../shared/component/loader/loader.service';
+import {finalize} from 'rxjs/operators';
 
 @Directive()
 export abstract class CrudFormDirective<T> extends BaseFormDirective {
@@ -13,17 +15,22 @@ export abstract class CrudFormDirective<T> extends BaseFormDirective {
   protected router: Router;
   protected activatedRoute: ActivatedRoute;
   protected messageService: MessageService;
+  protected loader: LoaderService;
 
   protected constructor(protected injector: Injector, protected service: CrudService<T, any>) {
     super();
     this.router = injector.get(Router);
     this.activatedRoute = injector.get(ActivatedRoute);
     this.messageService = injector.get(MessageService);
+    this.loader = injector.get(LoaderService);
 
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id != null) {
-      this.service.findById(id).subscribe(r => this.objeto = r,
-        error => Exception.show(error, this.messageService));
+      this.loader.display(true);
+      this.service.findById(id)
+        .pipe(finalize(() => this.loader.display(false)))
+        .subscribe(r => this.objeto = r,
+          error => Exception.show(error, this.messageService));
     } else {
       this.postResetForm();
     }
@@ -34,11 +41,14 @@ export abstract class CrudFormDirective<T> extends BaseFormDirective {
     if (this.form?.valid) {
       this.preSave();
       if (this.preSaveValid()) {
-        this.service.save(this.objeto).subscribe(r => {
-          this.changeUrl(r['id']);
-          this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Registro salvo'});
-          this.objeto = r;
-        }, error => Exception.show(error, this.messageService));
+        this.loader.display(true);
+        this.service.save(this.objeto)
+          .pipe(finalize(() => this.loader.display(false)))
+          .subscribe(r => {
+            this.changeUrl(r['id']);
+            this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Registro salvo'});
+            this.objeto = r;
+          }, error => Exception.show(error, this.messageService));
       }
     } else {
       this.validate();

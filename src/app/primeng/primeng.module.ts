@@ -1,7 +1,5 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {SidebarModule} from 'primeng/sidebar';
-import {MenuModule} from 'primeng/menu';
 import {CardModule} from 'primeng/card';
 import {ButtonModule} from 'primeng/button';
 import {TableModule} from 'primeng/table';
@@ -17,9 +15,6 @@ import {ToastModule} from 'primeng/toast';
 @NgModule({
   exports: [
     CommonModule,
-    SidebarModule,
-    MenuModule,
-    ButtonModule,
     CardModule,
     ButtonModule,
     TableModule,

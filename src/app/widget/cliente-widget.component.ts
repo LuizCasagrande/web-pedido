@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {WidgetService} from './widget.service';
 import {CurrencyPipe, DatePipe} from '@angular/common';
+import {LoaderService} from '../shared/component/loader/loader.service';
+import {finalize} from 'rxjs/operators';
 
 @Component({
   moduleId: module.id,
@@ -34,12 +36,15 @@ export class ClienteWidgetComponent implements OnInit {
   };
 
   constructor(private widgetService: WidgetService,
+              private loader: LoaderService,
               private datePipe: DatePipe,
               private currencyPipe: CurrencyPipe) {
   }
 
   ngOnInit(): void {
+    this.loader.display(true);
     this.widgetService.getVendasPorCliente(this.datePipe.transform(new Date(), '01/MM/yyyy'))
+      .pipe(finalize(() => this.loader.display(false)))
       .subscribe(r => {
         this.data = {
           labels: r.map(e => e.nome),

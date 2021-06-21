@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {WidgetService} from './widget.service';
 import {DatePipe} from '@angular/common';
+import {LoaderService} from '../shared/component/loader/loader.service';
+import {finalize} from 'rxjs/operators';
 
 @Component({
   moduleId: module.id,
@@ -33,11 +35,14 @@ export class ItemWidgetComponent implements OnInit {
   };
 
   constructor(private widgetService: WidgetService,
+              private loader: LoaderService,
               private datePipe: DatePipe) {
   }
 
   ngOnInit(): void {
+    this.loader.display(true);
     this.widgetService.getItensMaisVendidos(this.datePipe.transform(new Date(), '01/MM/yyyy'))
+      .pipe(finalize(() => this.loader.display(false)))
       .subscribe(r => {
         this.data = {
           labels: r.map(e => e.descricao),
