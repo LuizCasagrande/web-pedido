@@ -1,0 +1,64 @@
+<p-card>
+  <p-header class="header">
+    <div class="col-12 col-md-6">
+      <span>Cliente</span>
+      <span *ngIf="objeto.id" class="id">Id: {{objeto.id}}</span>
+    </div>
+    <app-form-buttons (changeUrlEvent)="changeUrl()"
+                      (newEvent)="new()"
+                      (saveEvent)="save()"></app-form-buttons>
+  </p-header>
+  <form>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <label [for]="nome.id">Nome: *</label>
+            <input #nome
+                   [(ngModel)]="objeto.nome"
+                   appValidation
+                   id="nome"
+                   maxlength="100"
+                   name="nome"
+                   pInputText
+                   required
+                   type="text">
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="form-group">
+            <label [for]="cpf.inputId">CPF: *</label>
+            <p-inputMask #cpf
+                         [(ngModel)]="objeto.cpf"
+                         [unmask]="true"
+                         appValidation
+                         id="cpf"
+                         mask="999.999.999-99"
+                         maxlength="11"
+                         name="cpf"
+                         required></p-inputMask>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="form-group">
+            <label [for]="telefone.inputId">Telefone: *</label>
+            <p-inputMask #telefone
+                         [(ngModel)]="objeto.telefone"
+                         [unmask]="true"
+                         appValidation
+                         id="telefone"
+                         mask="(99) 99999-9999"
+                         maxlength="11"
+                         name="telefone"
+                         required></p-inputMask>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</p-card>
+
+<div *ngIf="!!objeto.endereco">
+  <div class="space"></div>
+  <app-endereco [(objeto)]="objeto.endereco"></app-endereco>
+</div>

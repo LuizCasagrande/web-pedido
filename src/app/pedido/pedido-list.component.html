@@ -1,0 +1,115 @@
+<p-card>
+  <p-header class="header">
+    <div class="col-12 col-md-6">
+      <span>Pedidos</span>
+    </div>
+    <app-list-buttons (filterEvent)="displayFilter = true"></app-list-buttons>
+  </p-header>
+  <p-table (onLazyLoad)="load()"
+           [lazy]="true"
+           [loading]="loading"
+           [paginator]="list?.length > 0"
+           [responsive]="true"
+           [rowsPerPageOptions]="[5, 10, 15]"
+           [rows]="5"
+           [showCurrentPageReport]="true"
+           [totalRecords]="records"
+           [value]="list"
+           currentPageReportTemplate="{first} a {last} de {totalRecords}">
+    <ng-template pTemplate="header">
+      <tr>
+        <th class="w-150" pSortableColumn="id">
+          <span>Id</span>
+          <p-sortIcon field="id"></p-sortIcon>
+        </th>
+        <th pSortableColumn="dataCadastro">
+          <span>Data Cadastro</span>
+          <p-sortIcon field="dataCadastro"></p-sortIcon>
+        </th>
+        <th pSortableColumn="cliente.nome">
+          <span>Cliente</span>
+          <p-sortIcon field="cliente.nome"></p-sortIcon>
+        </th>
+        <th pSortableColumn="valorTotal">
+          <span>Valor Total</span>
+          <p-sortIcon field="valorTotal"></p-sortIcon>
+        </th>
+        <th class="w-150 text-center">Ações</th>
+      </tr>
+    </ng-template>
+    <ng-template let-rowData pTemplate="body">
+      <tr>
+        <td>{{rowData?.id}}</td>
+        <td>{{rowData?.dataCadastro}}</td>
+        <td>{{rowData?.cliente?.nome}}</td>
+        <td>{{rowData?.valorTotal | currency}}</td>
+        <td>
+          <app-list-actions (deleteEvent)="delete(rowData.id)"
+                            [id]="rowData.id"></app-list-actions>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td class="text-center" colspan="5">Nenhum Registro</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-card>
+
+<app-list-filter (clearFilterEvent)="clearFilter()"
+                 (filterEvent)="filter()"
+                 [display]="displayFilter">
+  <div class="col-12">
+    <div class="form-group">
+      <label [for]="filtroId.inputId">Id:</label>
+      <p-inputNumber #filtroId
+                     [(ngModel)]="filtro.id"
+                     [useGrouping]="false"
+                     inputId="filtroId"
+                     maxlength="20"
+                     mode="decimal"
+                     name="filtroId"></p-inputNumber>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="form-group">
+      <label [for]="filtroDataCadastroInicial.inputId">Data Cadastro Inicial:</label>
+      <p-calendar #filtroDataCadastroInicial
+                  [(ngModel)]="filtro.dataCadastroInicial"
+                  appendTo="body"
+                  dataType="string"
+                  dateFormat="dd/mm/yy"
+                  id="filtroDataCadastroInicial"
+                  name="filtroDataCadastroInicial"></p-calendar>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="form-group">
+      <label [for]="filtroDataCadastroFinal.inputId">Data Cadastro Final:</label>
+      <p-calendar #filtroDataCadastroFinal
+                  [(ngModel)]="filtro.dataCadastroFinal"
+                  appendTo="body"
+                  dataType="string"
+                  dateFormat="dd/mm/yy"
+                  id="filtroDataCadastroFinal"
+                  name="filtroDataCadastroFinal"></p-calendar>
+    </div>
+  </div>
+  <div class="col-12">
+    <label [for]="filtroCliente.inputId">Cliente:</label>
+    <p-autoComplete #filtroCliente
+                    (completeMethod)="clienteComplete($event)"
+                    [(ngModel)]="filtro.cliente"
+                    [dropdown]="true"
+                    [suggestions]="clienteSuggestions$ | async"
+                    appendTo="body"
+                    field="nome"
+                    id="filtroCliente"
+                    name="filtroCliente">
+      <ng-template let-cliente pTemplate="item">
+        <span>{{cliente?.id + ' - ' + cliente?.nome}}</span>
+      </ng-template>
+    </p-autoComplete>
+  </div>
+</app-list-filter>

@@ -57,7 +57,7 @@ export abstract class CrudListDirective<T, Y> {
         .pipe(finalize(() => this.loading = false))
         .subscribe(r => {
           this.list = r;
-          this.table.totalRecords = r.length;
+          this.records = r.length;
           this.filtroAplicado = true;
         }, error => Exception.show(error, this.messageService));
     }

@@ -1,0 +1,62 @@
+<p-card>
+  <p-header class="header">
+    <div class="col-12 col-md-6">
+      <span>Endereço</span>
+    </div>
+    <div class="col-12 col-md-6">
+      <button (click)="buscar()"
+              class="p-button-text"
+              label="Buscar"
+              pButton
+              type="button"></button>
+    </div>
+  </p-header>
+  <form>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="form-group">
+            <label [for]="numero.id">Número: *</label>
+            <input #numero
+                   [(ngModel)]="objeto.numero"
+                   appValidation
+                   id="numero"
+                   maxlength="50"
+                   name="numero"
+                   pInputText
+                   required
+                   type="text">
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="form-group">
+            <label [for]="cep.inputId">CEP: *</label>
+            <p-inputMask #cep
+                         [(ngModel)]="objeto.cep"
+                         [unmask]="true"
+                         appValidation
+                         id="cep"
+                         mask="99.999-999"
+                         maxlength="8"
+                         name="cep"
+                         required></p-inputMask>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group">
+            <label [for]="descricao.id">Descrição: *</label>
+            <input #descricao
+                   [(ngModel)]="objeto.descricao"
+                   appValidation
+                   id="descricao"
+                   maxlength="100"
+                   name="descricao"
+                   pInputText
+                   required
+                   type="text">
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</p-card>

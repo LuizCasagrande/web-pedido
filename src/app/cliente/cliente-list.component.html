@@ -1,7 +1,7 @@
 <p-card>
   <p-header class="header">
     <div class="col-12 col-md-6">
-      <span>Itens</span>
+      <span>Clientes</span>
     </div>
     <app-list-buttons (filterEvent)="displayFilter = true"></app-list-buttons>
   </p-header>
@@ -22,13 +22,17 @@
           <span>Id</span>
           <p-sortIcon field="id"></p-sortIcon>
         </th>
-        <th pSortableColumn="descricao">
-          <span>Descrição</span>
-          <p-sortIcon field="descricao"></p-sortIcon>
+        <th pSortableColumn="nome">
+          <span>Nome</span>
+          <p-sortIcon field="nome"></p-sortIcon>
         </th>
-        <th pSortableColumn="valor">
-          <span>Valor</span>
-          <p-sortIcon field="valor"></p-sortIcon>
+        <th pSortableColumn="cpf">
+          <span>Cpf</span>
+          <p-sortIcon field="cpf"></p-sortIcon>
+        </th>
+        <th pSortableColumn="telefone">
+          <span>Telefone</span>
+          <p-sortIcon field="telefone"></p-sortIcon>
         </th>
         <th class="w-150 text-center">Ações</th>
       </tr>
@@ -36,8 +40,9 @@
     <ng-template let-rowData pTemplate="body">
       <tr>
         <td>{{rowData?.id}}</td>
-        <td>{{rowData?.descricao}}</td>
-        <td>{{rowData?.valor | currency}}</td>
+        <td>{{rowData?.nome}}</td>
+        <td>{{rowData?.cpf | cpf}}</td>
+        <td>{{rowData?.telefone | telefone}}</td>
         <td>
           <app-list-actions (deleteEvent)="delete(rowData.id)"
                             [id]="rowData.id"></app-list-actions>
@@ -46,7 +51,7 @@
     </ng-template>
     <ng-template pTemplate="emptymessage">
       <tr>
-        <td class="text-center" colspan="4">Nenhum Registro</td>
+        <td class="text-center" colspan="5">Nenhum Registro</td>
       </tr>
     </ng-template>
   </p-table>
@@ -69,30 +74,38 @@
   </div>
   <div class="col-12">
     <div class="form-group">
-      <label [for]="filtroDescricao.id">Descrição:</label>
-      <input #filtroDescricao
-             [(ngModel)]="filtro.descricao"
-             id="filtroDescricao"
+      <label [for]="filtroNome.id">Nome:</label>
+      <input #filtroNome
+             [(ngModel)]="filtro.nome"
+             id="filtroNome"
              maxlength="100"
-             name="filtroDescricao"
+             name="filtroNome"
              pInputText
              type="text">
     </div>
   </div>
   <div class="col-12">
-    <label [for]="filtroCategoria.inputId">Categoria:</label>
-    <p-autoComplete #filtroCategoria
-                    (completeMethod)="categoriaComplete($event)"
-                    [(ngModel)]="filtro.categoria"
-                    [dropdown]="true"
-                    [suggestions]="categoriaSuggestions$ | async"
-                    appendTo="body"
-                    field="descricao"
-                    id="filtroCategoria"
-                    name="filtroCategoria">
-      <ng-template let-categoria pTemplate="item">
-        <span>{{categoria?.id + ' - ' + categoria?.descricao}}</span>
-      </ng-template>
-    </p-autoComplete>
+    <div class="form-group">
+      <label [for]="filtroCpf.inputId">Cpf:</label>
+      <p-inputNumber #filtroCpf
+                     [(ngModel)]="filtro.cpf"
+                     [useGrouping]="false"
+                     inputId="filtroCpf"
+                     maxlength="11"
+                     mode="decimal"
+                     name="filtroCpf"></p-inputNumber>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="form-group">
+      <label [for]="filtroTelefone.inputId">Telefone:</label>
+      <p-inputNumber #filtroTelefone
+                     [(ngModel)]="filtro.telefone"
+                     [useGrouping]="false"
+                     inputId="filtroTelefone"
+                     maxlength="11"
+                     mode="decimal"
+                     name="filtroTelefone"></p-inputNumber>
+    </div>
   </div>
 </app-list-filter>

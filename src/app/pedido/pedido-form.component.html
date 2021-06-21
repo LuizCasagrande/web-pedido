@@ -1,0 +1,69 @@
+<p-card>
+  <p-header class="header">
+    <div class="col-12 col-md-6">
+      <span>Pedido</span>
+      <span *ngIf="objeto.id" class="id">Id: {{objeto.id}}</span>
+    </div>
+    <app-form-buttons (changeUrlEvent)="changeUrl()"
+                      (newEvent)="new()"
+                      (saveEvent)="save()"></app-form-buttons>
+  </p-header>
+  <form>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-4">
+          <div class="form-group">
+            <label [for]="dataCadastro.inputId">Data Cadastro: *</label>
+            <p-calendar #dataCadastro
+                        [(ngModel)]="objeto.dataCadastro"
+                        appValidation
+                        dataType="string"
+                        dateFormat="dd/mm/yy"
+                        id="dataCadastro"
+                        name="dataCadastro"
+                        required></p-calendar>
+          </div>
+        </div>
+        <div class="col-12 col-md-8">
+          <label [for]="cliente.inputId">Cliente: *</label>
+          <p-autoComplete #cliente
+                          (completeMethod)="clienteComplete($event)"
+                          [(ngModel)]="objeto.cliente"
+                          [dropdown]="true"
+                          [suggestions]="clienteSuggestions$ | async"
+                          appValidation
+                          appendTo="body"
+                          field="nome"
+                          id="cliente"
+                          name="cliente"
+                          required>
+            <ng-template let-cliente pTemplate="item">
+              <span>{{cliente?.id + ' - ' + cliente?.nome}}</span>
+            </ng-template>
+          </p-autoComplete>
+        </div>
+        <div class="col-12">
+          <hr class="pb-2">
+          <div class="row">
+            <div class="col-6 text-center">
+              <div *ngIf="!!objeto.cliente">
+                <h5>Endereço de Entrega:</h5>
+                <span class="d-block">{{objeto.cliente.endereco?.descricao}}</span>
+                <span>n° {{objeto.cliente.endereco?.numero}} - </span>
+                <span>CEP {{objeto.cliente.endereco?.cep | cep}}</span>
+              </div>
+            </div>
+            <div class="col-6 text-center">
+              <h5>Valor Total:</h5>
+              <span>{{objeto?.valorTotal || 0 | currency}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</p-card>
+
+<div class="space"></div>
+<app-pedido-item (listChange)="calculaTotal()"
+                 [(list)]="objeto.itens"></app-pedido-item>

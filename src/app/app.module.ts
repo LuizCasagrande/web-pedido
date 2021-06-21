@@ -13,6 +13,9 @@ import {registerLocaleData} from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import {ItemModule} from './item/item.module';
 import {PrimengModule} from './primeng/primeng.module';
+import {ClienteModule} from './cliente/cliente.module';
+import {PedidoModule} from './pedido/pedido.module';
+import {InicioModule} from './inicio/inicio.module';
 
 registerLocaleData(localePt);
 
@@ -27,8 +30,11 @@ registerLocaleData(localePt);
     NavModule,
     NgbModule,
     HttpClientModule,
+    InicioModule,
     CategoriaModule,
     ItemModule,
+    ClienteModule,
+    PedidoModule,
     PrimengModule,
   ],
   providers: [

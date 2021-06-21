@@ -57,7 +57,7 @@ html, body {
   font-weight: 500;
   font-size: 1.5em;
   display: block;
-  padding: 1em;
+  padding: 1em 1em 0 1em;
   width: 100%;
 
   div {
@@ -90,7 +90,7 @@ table {
 
   .p-button-link {
     font-size: 1.2em;
-    color: #333333;
+    color: #333333 !important;
     padding: 0;
   }
 }
