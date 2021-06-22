@@ -1,0 +1,52 @@
+<div class="login">
+  <p-card [style]="{width: '350px'}">
+    <p-header class="header">
+      <div class="col-12 col-md-6">
+        <span>Login</span>
+      </div>
+      <div class="col-12 col-md-6"></div>
+    </p-header>
+    <form>
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label [for]="usuarioEmail.id">Email: *</label>
+              <input #usuarioEmail
+                     [(ngModel)]="email"
+                     appValidation
+                     id="email"
+                     maxlength="150"
+                     name="email"
+                     pInputText
+                     required
+                     type="email">
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="form-group">
+              <label [for]="usuarioSenha.id">Senha: *</label>
+              <input #usuarioSenha
+                     [(ngModel)]="senha"
+                     appValidation
+                     id="senha"
+                     maxlength="150"
+                     name="senha"
+                     pInputText
+                     required
+                     type="password">
+            </div>
+          </div>
+          <div class="col-12">
+            <button (click)="entrar()"
+                    class="mt-4"
+                    label="Entrar"
+                    pButton
+                    style="width: 100%"
+                    type="button"></button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </p-card>
+</div>

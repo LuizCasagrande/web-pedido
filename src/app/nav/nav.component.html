@@ -1,9 +1,11 @@
-<div class="nav">
+<div *ngIf="hasToken()" class="nav">
   <div>
     <p-button (onClick)="display = !display" icon="pi pi-bars"></p-button>
   </div>
   <div class="text-center" style="font-size: 1.5rem">Web Pedido</div>
-  <div></div>
+  <div class="text-right">
+    <p-button (onClick)="logout()" label="Sair"></p-button>
+  </div>
 </div>
 
 <p-sidebar [(visible)]="display"

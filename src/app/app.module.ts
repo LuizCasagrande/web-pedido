@@ -6,7 +6,7 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NavModule} from './nav/nav.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {CategoriaModule} from './categoria/categoria.module';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {registerLocaleData} from '@angular/common';
@@ -18,6 +18,8 @@ import {PedidoModule} from './pedido/pedido.module';
 import {InicioModule} from './inicio/inicio.module';
 import {LoaderModule} from './shared/component/loader/loader.module';
 import {LoaderService} from './shared/component/loader/loader.service';
+import {HttpRequestInterceptor} from './http-request.interceptor';
+import {LoginModule} from './login/login.module';
 
 registerLocaleData(localePt);
 
@@ -39,8 +41,10 @@ registerLocaleData(localePt);
     PedidoModule,
     PrimengModule,
     LoaderModule,
+    LoginModule,
   ],
   providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true},
     {provide: LOCALE_ID, useValue: 'pt-BR'},
     {provide: DEFAULT_CURRENCY_CODE, useValue: 'BRL'},
     MessageService,
