@@ -24,7 +24,11 @@ export class ClienteFormComponent extends CrudFormDirective<Cliente> {
   }
 
   validate(): void {
-    this.enderecoComponent?.validate();
     super.validate();
+    this.enderecoComponent?.validate();
+  }
+
+  isValid(): boolean {
+    return super.isValid() && this.enderecoComponent?.isValid();
   }
 }

@@ -20,6 +20,7 @@ import {LoaderModule} from './shared/component/loader/loader.module';
 import {LoaderService} from './shared/component/loader/loader.service';
 import {HttpRequestInterceptor} from './http-request.interceptor';
 import {LoginModule} from './login/login.module';
+import {NgxMaskModule} from 'ngx-mask';
 
 registerLocaleData(localePt);
 
@@ -42,6 +43,7 @@ registerLocaleData(localePt);
     PrimengModule,
     LoaderModule,
     LoginModule,
+    NgxMaskModule.forRoot(),
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true},

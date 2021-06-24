@@ -15,6 +15,7 @@ import {ListFilterModule} from '../shared/component/list-filter/list-filter.modu
 import {EnderecoComponent} from './endereco/endereco.component';
 import {EnderecoService} from './endereco/endereco.service';
 import {PipeModule} from '../shared/pipe/pipe.module';
+import {NgxMaskModule} from 'ngx-mask';
 
 @NgModule({
   imports: [
@@ -29,6 +30,7 @@ import {PipeModule} from '../shared/pipe/pipe.module';
     ListActionsModule,
     ListFilterModule,
     PipeModule,
+    NgxMaskModule,
   ],
   declarations: [
     ClienteListComponent,

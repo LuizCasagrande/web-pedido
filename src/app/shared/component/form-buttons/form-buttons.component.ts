@@ -27,7 +27,6 @@ import {Component, EventEmitter, Output} from '@angular/core';
 export class FormButtonsComponent {
 
   @Output() saveEvent = new EventEmitter<void>();
-  @Output() deleteEvent = new EventEmitter<void>();
   @Output() changeUrlEvent = new EventEmitter<void>();
   @Output() newEvent = new EventEmitter<void>();
 }

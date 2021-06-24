@@ -48,9 +48,7 @@
             <div class="col-6 text-center">
               <div *ngIf="!!objeto.cliente">
                 <h5>Endereço de Entrega:</h5>
-                <span class="d-block">{{objeto.cliente.endereco?.descricao}}</span>
-                <span>n° {{objeto.cliente.endereco?.numero}} - </span>
-                <span>CEP {{objeto.cliente.endereco?.cep | cep}}</span>
+                <span>{{endereco}}</span>
               </div>
             </div>
             <div class="col-6 text-center">

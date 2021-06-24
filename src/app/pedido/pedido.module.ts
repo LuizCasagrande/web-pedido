@@ -16,6 +16,7 @@ import {ListButtonsModule} from '../shared/component/list-buttons/list-buttons.m
 import {ListActionsModule} from '../shared/component/list-actions/list-actions.module';
 import {ListFilterModule} from '../shared/component/list-filter/list-filter.module';
 import {PipeModule} from '../shared/pipe/pipe.module';
+import {CepPipe} from '../shared/pipe/cep.pipe';
 
 @NgModule({
   imports: [
@@ -45,6 +46,7 @@ import {PipeModule} from '../shared/pipe/pipe.module';
     PedidoService,
     ClienteService,
     ItemService,
+    CepPipe,
   ],
 })
 export class PedidoModule {

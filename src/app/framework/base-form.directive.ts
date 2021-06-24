@@ -15,4 +15,8 @@ export abstract class BaseFormDirective {
       }
     }
   }
+
+  isValid(): boolean {
+    return this.form?.valid;
+  }
 }

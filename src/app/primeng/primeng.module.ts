@@ -5,7 +5,6 @@ import {ButtonModule} from 'primeng/button';
 import {TableModule} from 'primeng/table';
 import {InputTextModule} from 'primeng/inputtext';
 import {DialogModule} from 'primeng/dialog';
-import {InputMaskModule} from 'primeng/inputmask';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import {CalendarModule} from 'primeng/calendar';
 import {InputNumberModule} from 'primeng/inputnumber';
@@ -20,7 +19,6 @@ import {ToastModule} from 'primeng/toast';
     TableModule,
     InputTextModule,
     DialogModule,
-    InputMaskModule,
     AutoCompleteModule,
     CalendarModule,
     InputNumberModule,

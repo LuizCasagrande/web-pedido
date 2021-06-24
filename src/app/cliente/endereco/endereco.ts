@@ -3,5 +3,8 @@ export class Endereco {
   id: number;
   numero: string;
   cep: string;
-  descricao: string;
+  rua: string;
+  bairro: string;
+  cidade: string;
+  estado: string;
 }

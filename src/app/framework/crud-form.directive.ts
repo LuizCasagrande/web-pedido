@@ -38,7 +38,7 @@ export abstract class CrudFormDirective<T> extends BaseFormDirective {
 
   @throttle(500, true)
   save(): void {
-    if (this.form?.valid) {
+    if (this.isValid()) {
       this.preSave();
       if (this.preSaveValid()) {
         this.loader.display(true);

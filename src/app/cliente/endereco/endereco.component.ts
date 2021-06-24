@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Endereco} from './endereco';
 import {BaseFormDirective} from '../../framework/base-form.directive';
 import {MessageService} from 'primeng/api';
@@ -14,7 +14,6 @@ import {finalize} from 'rxjs/operators';
 export class EnderecoComponent extends BaseFormDirective {
 
   @Input() objeto = new Endereco();
-  @Output() objetoChange = new EventEmitter<Endereco>();
 
   constructor(protected service: EnderecoService,
               private messageService: MessageService,
@@ -24,15 +23,16 @@ export class EnderecoComponent extends BaseFormDirective {
 
   @throttle(1000, true)
   buscar(): void {
-    if (this.objeto.cep?.length > 0) {
+    if (this.objeto.cep?.length === 8) {
       this.loader.display(true);
       this.service.buscar(this.objeto.cep)
         .pipe(finalize(() => this.loader.display(false)))
-        .subscribe(r =>
-          this.objeto.descricao = `${r['street']} - ${r['neighborhood']} - ${r['city']} - ${r['state']}`, () =>
-          this.messageService.add({severity: 'error', summary: 'Erro', detail: 'Não foi possível buscar pelo CEP informado'}));
-    } else {
-      this.messageService.add({severity: 'error', summary: 'Erro', detail: 'Informe o CEP'});
+        .subscribe(r => {
+          this.objeto.rua = r['street'];
+          this.objeto.bairro = r['neighborhood'];
+          this.objeto.cidade = r['city'];
+          this.objeto.estado = r['state'];
+        }, () => this.messageService.add({severity: 'error', summary: 'Erro', detail: 'Não foi possível buscar pelo CEP informado'}));
     }
   }
 }

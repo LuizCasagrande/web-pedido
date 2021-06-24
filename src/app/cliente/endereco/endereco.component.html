@@ -3,13 +3,7 @@
     <div class="col-12 col-md-6">
       <span>Endereço</span>
     </div>
-    <div class="col-12 col-md-6">
-      <button (click)="buscar()"
-              class="p-button-text"
-              label="Buscar"
-              pButton
-              type="button"></button>
-    </div>
+    <div class="col-12 col-md-6"></div>
   </p-header>
   <form>
     <div class="container">
@@ -30,27 +24,71 @@
         </div>
         <div class="col-12 col-md-6">
           <div class="form-group">
-            <label [for]="cep.inputId">CEP: *</label>
-            <p-inputMask #cep
-                         [(ngModel)]="objeto.cep"
-                         [unmask]="true"
-                         appValidation
-                         id="cep"
-                         mask="99.999-999"
-                         maxlength="8"
-                         name="cep"
-                         required></p-inputMask>
+            <label [for]="cep.id">CEP: *</label>
+            <input #cep
+                   (blur)="buscar()"
+                   [(ngModel)]="objeto.cep"
+                   appValidation
+                   id="cep"
+                   mask="00.000-000"
+                   maxlength="10"
+                   name="cep"
+                   pInputText
+                   required
+                   type="text">
           </div>
         </div>
-        <div class="col-12">
+        <div class="col-12 col-md-6">
           <div class="form-group">
-            <label [for]="descricao.id">Descrição: *</label>
-            <input #descricao
-                   [(ngModel)]="objeto.descricao"
+            <label [for]="rua.id">Rua: *</label>
+            <input #rua
+                   [(ngModel)]="objeto.rua"
                    appValidation
-                   id="descricao"
+                   id="rua"
                    maxlength="100"
-                   name="descricao"
+                   name="rua"
+                   pInputText
+                   required
+                   type="text">
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="form-group">
+            <label [for]="bairro.id">Bairro: *</label>
+            <input #bairro
+                   [(ngModel)]="objeto.bairro"
+                   appValidation
+                   id="bairro"
+                   maxlength="100"
+                   name="bairro"
+                   pInputText
+                   required
+                   type="text">
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="form-group">
+            <label [for]="cidade.id">Cidade: *</label>
+            <input #cidade
+                   [(ngModel)]="objeto.cidade"
+                   appValidation
+                   id="cidade"
+                   maxlength="100"
+                   name="cidade"
+                   pInputText
+                   required
+                   type="text">
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="form-group">
+            <label [for]="estado.id">Estado: *</label>
+            <input #estado
+                   [(ngModel)]="objeto.estado"
+                   appValidation
+                   id="estado"
+                   maxlength="2"
+                   name="estado"
                    pInputText
                    required
                    type="text">

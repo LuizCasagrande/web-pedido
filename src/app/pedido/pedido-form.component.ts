@@ -6,6 +6,7 @@ import {Observable} from 'rxjs';
 import {Cliente} from '../cliente/cliente';
 import {ClienteService} from '../cliente/cliente.service';
 import {throttle} from '../shared/decorator/throttle';
+import {CepPipe} from '../shared/pipe/cep.pipe';
 
 @Component({
   moduleId: module.id,
@@ -18,8 +19,14 @@ export class PedidoFormComponent extends CrudFormDirective<Pedido> {
 
   constructor(protected injector: Injector,
               private clienteService: ClienteService,
+              private cepPipe: CepPipe,
               protected service: PedidoService) {
     super(injector, service);
+  }
+
+  get endereco(): string {
+    const {endereco} = this.objeto?.cliente;
+    return `${endereco.numero} - ${endereco.rua} - ${endereco.bairro} - ${this.cepPipe.transform(endereco.cep)}`;
   }
 
   clienteComplete($event: any): void {

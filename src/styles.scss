@@ -6,6 +6,7 @@ html, body {
   font-family: 'Open Sans', sans-serif;
   width: 100vw;
   height: 100vh;
+  overflow-x: clip;
 }
 
 @for $i from 1 through 400 {
@@ -14,9 +15,16 @@ html, body {
   }
 }
 
-*:focus, .p-paginator-rpp-options, .p-checkbox-box.p-focus {
+*:focus, .p-paginator-rpp-options {
   outline: none !important;
   box-shadow: none !important;
+}
+
+.p-autocomplete-dropdown {
+  color: #A6A6A6 !important;
+  background-color: #FFFFFF !important;
+  border: 1px solid #A6A6A6 !important;
+  border-left: none !important;
 }
 
 .p-inputtext, .p-autocomplete, .p-inputnumber, .p-calendar {
@@ -26,6 +34,23 @@ html, body {
 .p-sidebar, .p-sidebar-content {
   z-index: 999 !important;
   padding: 0 !important;
+
+  .p-menu {
+    width: 100%;
+    border: none;
+
+    .pi, .p-menuitem-link {
+      font-size: 1.3rem;
+    }
+
+    .p-menuitem-link {
+      height: 3.3rem;
+
+      span:first-child {
+        padding: 0 1rem;
+      }
+    }
+  }
 }
 
 .p-dialog-header > h5 {
@@ -34,23 +59,6 @@ html, body {
 
 .nav .pi {
   font-size: 1.1rem;
-}
-
-.p-menu {
-  width: 100%;
-  border: none;
-
-  .pi, .p-menuitem-link {
-    font-size: 1.3rem;
-  }
-
-  .p-menuitem-link {
-    height: 3.3rem;
-
-    span:first-child {
-      padding: 0 1rem;
-    }
-  }
 }
 
 .p-blockui {
@@ -81,6 +89,8 @@ html, body {
 }
 
 table {
+  table-layout: fixed;
+  white-space: nowrap;
   width: 100%;
 
   td {

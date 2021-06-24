@@ -27,30 +27,32 @@
         </div>
         <div class="col-12 col-md-6">
           <div class="form-group">
-            <label [for]="cpf.inputId">CPF: *</label>
-            <p-inputMask #cpf
-                         [(ngModel)]="objeto.cpf"
-                         [unmask]="true"
-                         appValidation
-                         id="cpf"
-                         mask="999.999.999-99"
-                         maxlength="11"
-                         name="cpf"
-                         required></p-inputMask>
+            <label [for]="cpf.id">CPF: *</label>
+            <input #cpf
+                   [(ngModel)]="objeto.cpf"
+                   appValidation
+                   id="cpf"
+                   mask="000.000.000-00"
+                   maxlength="100"
+                   name="cpf"
+                   pInputText
+                   required
+                   type="text">
           </div>
         </div>
         <div class="col-12 col-md-6">
           <div class="form-group">
-            <label [for]="telefone.inputId">Telefone: *</label>
-            <p-inputMask #telefone
-                         [(ngModel)]="objeto.telefone"
-                         [unmask]="true"
-                         appValidation
-                         id="telefone"
-                         mask="(99) 99999-9999"
-                         maxlength="11"
-                         name="telefone"
-                         required></p-inputMask>
+            <label [for]="telefone.id">Telefone: *</label>
+            <input #telefone
+                   [(ngModel)]="objeto.telefone"
+                   appValidation
+                   id="telefone"
+                   mask="(00) 0000-0000||(00) 00000-0000"
+                   maxlength="100"
+                   name="telefone"
+                   pInputText
+                   required
+                   type="text">
           </div>
         </div>
       </div>
@@ -60,5 +62,5 @@
 
 <div *ngIf="!!objeto.endereco">
   <div class="space"></div>
-  <app-endereco [(objeto)]="objeto.endereco"></app-endereco>
+  <app-endereco [objeto]="objeto.endereco"></app-endereco>
 </div>
