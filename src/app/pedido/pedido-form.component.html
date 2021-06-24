@@ -46,7 +46,7 @@
           <hr class="pb-2">
           <div class="row">
             <div class="col-6 text-center">
-              <div *ngIf="!!objeto.cliente">
+              <div *ngIf="!!objeto.cliente?.id">
                 <h5>Endereço de Entrega:</h5>
                 <span>{{endereco}}</span>
               </div>
